@@ -13,22 +13,17 @@ function getComputerChoice() {
 function getUserChoice() {
   let userChoice = prompt("Rock, paper, or scissors?");
   const options = ["rock", 'paper', 'scissors'];
-  if (options.indexOf(userChoice.toLowerCase()) === -1) {
+  while (options.indexOf(userChoice.toLowerCase()) === -1) {
     alert("not a valid option. Please select rock, paper, or scissors");
-  } else {
+    userChoice = prompt("Rock, paper, or scissors?");
+  }
     return userChoice.toLowerCase();
   }
-}
-
-// Initialise computer and user scores with 0
-let computerScore = 0;
-let userScore = 0;
-
-let userChoice = getUserChoice();
-let computerChoice = getComputerChoice();
 
 // Create a function to play a round
-function playRound(userChoice, computerChoice) {
+function playRound() {
+  let userChoice = getUserChoice();
+  let computerChoice = getComputerChoice();
   if ((userChoice == "rock") && (computerChoice == "paper")) {
     computerScore++;
     alert(`You lose. ${computerChoice} beats ${userChoice}.`);
@@ -50,4 +45,15 @@ function playRound(userChoice, computerChoice) {
   } else if (userChoice == computerChoice) {
     alert("It's a tie!")
   }
+}
+
+// Create function to play the entire game
+function playGame(numberOfRounds=5) {
+  userScore = 0;
+  computerScore = 0;
+  while (numberOfRounds > 0) {
+    playRound();
+    numberOfRounds--;
+  }
+  alert(`Final score: User: ${userScore}, Computer: ${computerScore}`);
 }
