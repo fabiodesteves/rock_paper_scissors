@@ -10,37 +10,30 @@ function getComputerChoice() {
   }
 }
 // Create a function to get a user option
-function getUserChoice() {
-  let userChoice = prompt("Rock, paper, or scissors?");
-  const options = ["rock", 'paper', 'scissors'];
-  while (options.indexOf(userChoice.toLowerCase()) === -1) {
-    alert("not a valid option. Please select rock, paper, or scissors");
-    userChoice = prompt("Rock, paper, or scissors?");
-  }
-    return userChoice.toLowerCase();
-  }
+// function getUserChoice() {
+//   let userChoice = prompt("Rock, paper, or scissors?");
+//   while (options.indexOf(userChoice.toLowerCase()) === -1) {
+//   const options = ["rock", 'paper', 'scissors'];
+//     alert("not a valid option. Please select rock, paper, or scissors");
+//     userChoice = prompt("Rock, paper, or scissors?");
+//   }
+//     return userChoice.toLowerCase();
+//   }
 
 // Create a function to play a round
-function playRound() {
-  let userChoice = getUserChoice();
+function playRound(userChoice) {
   let computerChoice = getComputerChoice();
   if ((userChoice == "rock") && (computerChoice == "paper")) {
-    computerScore++;
     alert(`You lose. ${computerChoice} beats ${userChoice}.`);
   } else if ((userChoice == "paper") && (computerChoice == "scissors")) {
-    computerScore++;
     alert(`You lose. ${computerChoice} beats ${userChoice}.`);
   } else if ((userChoice == "scissors") && (computerChoice == "rock")) {
-    computerScore++;
     alert(`You lose. ${computerChoice} beats ${userChoice}.`);
   } else if ((userChoice == "rock") && (computerChoice == "scissors")) {
-    userScore++;
     alert(`You win! ${userChoice} beats ${computerChoice}.`);
   } else if ((userChoice == "paper") && (computerChoice == "rock")) {
-    userScore++;
     alert(`You win! ${userChoice} beats ${computerChoice}.`);
   } else if ((userChoice == "scissors") && (computerChoice == "paper")) {
-    userScore++;
     alert(`You win! ${userChoice} beats ${computerChoice}.`);
   } else if (userChoice == computerChoice) {
     alert("It's a tie!")
@@ -51,9 +44,26 @@ function playRound() {
 function playGame(numberOfRounds=5) {
   userScore = 0;
   computerScore = 0;
-  while (numberOfRounds > 0) {
-    playRound();
-    numberOfRounds--;
-  }
   alert(`Final score: User: ${userScore}, Computer: ${computerScore}`);
 }
+
+// Add event listeners to buttons
+const playGameButton = document.querySelector("#play-game");
+playGameButton.addEventListener("click", () => {
+  playGame();
+})
+
+const rockButton = document.querySelector("#Rock");
+rockButton.addEventListener("click", () => {
+  playRound("rock");
+});
+
+const paperButton = document.querySelector("#Paper");
+paperButton.addEventListener("click", () => {
+  playRound("paper");
+});
+
+const scissorsButton = document.querySelector("#Scissors");
+scissorsButton.addEventListener("click", () => {
+  playRound("scissors");
+});
